@@ -1,0 +1,9 @@
+<h1>Te vas a logear aquí</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<h1>Fin del login</h1>
