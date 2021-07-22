@@ -1,0 +1,37 @@
+{% load static %}
+<head>
+<title>AskMeNow :: Landing Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="{% static '/accounts/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body class="logeado" data-dev="logeado">
+    <div id="wrapper" class="home-page">
+    <!-- start header -->
+    <div class="topnav">
+      <a class="active" href="{% url 'home' %}""><i class="fa fa-fw fa-home"></i> Inicio</a>
+      <a href="{% url 'my_account' %}"><i class="fa fa-fw fa-user"></i> Mi cuenta</a>
+      <a href="{% url 'logout' %}">Cerrar Sesión</a>
+
+    </div>
+    <!-- end header -->
+    </div>
+
+<h1 id="header" role="heading">
+    <a href="https://www.u-cursos.cl">
+        <span>AskMeNow :: </span>
+    </a>
+</h1>
+
+</body>
+
+
+
+
+</body>
+<br>
+Tu correo es {{request.user.email}}
+<br>
+Tienes {{request.user.points}} puntos

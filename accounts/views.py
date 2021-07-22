@@ -1,5 +1,5 @@
 # Create your views here.
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import LoginForm, SignUpForm
@@ -20,14 +20,15 @@ def login_view(request):
             user = authenticate(email=email, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('landing_page/')
+                msg = "Sucess"
+                return render(request, 'accounts/home.html', {"form": form, "msg": msg})
 
             else:
                 msg = 'Invalid credentials'
         else:
             msg = 'Error validating the form'
 
-    return render(request, 'accounts/login.html', {"form": form, "msg": msg})
+    return render(request, 'landing_page.html', {"form": form, "msg": msg})
 
 
 def register_view(request):
@@ -57,12 +58,35 @@ def landing_page(request):
     """
     Landing page after login
     """
-    msg = None
-    success = False
 
     if request.user.is_authenticated:
-        # Do something for authenticated users.
-        return render(request, "landing_page.html", {"msg": msg, "success": success})
+        return render(request, "landing_page.html")
 
     else:
-        return render(request, "not_logged.html", {"msg": msg, "success": success})
+        return render(request, "not_logged.html")
+
+
+def logout_from_account(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return render(request, "not_logged.html")
+
+    return render(request, "not_logged.html")
+
+
+def home(request):
+    if request.user.is_authenticated:
+        return render(request, "accounts/home.html")
+
+    return render(request, "not_logged.html")
+
+
+
+def my_account(request):
+    """
+    My account page
+    """
+    if request.user.is_authenticated:
+        return render(request, "accounts/my_account.html")
+
+    return render(request, "landing_page.html")

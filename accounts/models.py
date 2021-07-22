@@ -86,3 +86,14 @@ class User(AbstractBaseUser):
         return True
 
     objects = UserManager()
+
+
+class Survey(models.Model):
+    finished = models.BooleanField(verbose_name='finished', default=False)
+    link = models.URLField(verbose_name='link_encuesta', max_length=1024)
+    name = models.CharField(verbose_name='nombre_encuesta', max_length=100)
+    avg_duration = models.FloatField(verbose_name='duracion_promedio', default=5.0)
+    prize = models.CharField(verbose_name='premio', default='', max_length=200)
+    created_at = models.DateTimeField(verbose_name='fecha_de_creacion', auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name='fecha_ultima_actualizacion', auto_now=True)
+
